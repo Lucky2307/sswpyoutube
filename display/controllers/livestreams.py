@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 
 from youtubeapi.models.video import Video
 
-def index(request):
+def videosIndex(request):
     upcomingVideos = Video.objects.filter(liveBroadcastContent='upcoming')
     liveVideos = Video.objects.filter(liveBroadcastContent='live')
 

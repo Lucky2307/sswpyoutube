@@ -1,0 +1,19 @@
+{% url 'videos-index' as videos_index_url %}
+{% url 'channel-index' as channel_index_url %}
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="{{ videos_index_url }}">Holoinfo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item {% if request.path == videos_index_url %} active {%endif%}">
+          <a class="nav-link" href="{{ videos_index_url }}">Home<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item {% if request.path == channel_index_url %} active {%endif%}">
+          <a class="nav-link" href="{{ channel_index_url }}">Channels</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
