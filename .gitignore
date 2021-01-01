@@ -9,3 +9,4 @@ display/__pycache__
 display/controllers/__pycache__
 display/migrations/__pycache__
 display/forms/__pycache__
+display/templatetags/__pycache__

@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load my_tags %}
 
 {% block title %}
 <title>
@@ -7,11 +8,6 @@
 {% endblock %}
 
 {% block content %}
-  <section class="jumbotron text-center">
-    <div class="container">
-      <h1>Currently Live Broadcast</h1>
-    </div>
-  </section>
   
   <div class="album py-5 bg-light">
       <div class="container">
@@ -22,12 +18,21 @@
           <a href="https://www.youtube.com/watch?v={{ liveVideo.videoId }}">
             <div class="card mb-4 shadow-sm">
               <img style="  width: 347px;height: 180px;object-fit: cover;" src="{{ liveVideo.thumbnail }}" alt="url">
-                 <img src="{{ liveVideo.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 8px;bottom: 80px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
+                 <img src="{{ liveVideo.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 12px;bottom: 125px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
                  </a>
               <div class="card-body">
-                <p style="  white-space: nowrap; overflow: hidden;text-overflow: ellipsis; max-width: 200px;" class="card-text">{{ liveVideo.title }}</p>
+                <div style="height: 65px;margin-top: 10px;">
+                  <p style="display: -webkit-box;
+                  /* webkit only works on a few browsers */
+                  -webkit-line-clamp: 2;
+                  -webkit-box-orient: vertical;
+                  overflow: hidden;">{{ liveVideo.title }}</p>
+                </div>
                 <div class="d-flex justify-content-between align-items-center">
-                  <small class="text-muted">{{ liveVideo.actualStartTime }}</small>
+                  <div class="btn-group">
+                    <a href="https://www.youtube.com/watch?v={{ liveVideo.videoId }}"><button type="button" class="btn btn-sm btn-outline-danger">Live</button></a>
+                  </div>
+                  <small class="text-muted">{{liveVideo.actualStartTime}}</small>
                 </div>
               </div>
             </div>
@@ -36,13 +41,8 @@
           
         </div>
       </div>
+      <hr class="mb-4">
     </div>
-  
-  <section class="jumbotron text-center">
-    <div class="container">
-      <h1>Upcoming Live Streams</h1>
-    </div>
-  </section>
   
   <div class="album py-5 bg-light">
       <div class="container">
@@ -54,11 +54,21 @@
           <a href="https://www.youtube.com/watch?v={{ upcomingVideo.videoId }}">
             <div class="card mb-4 shadow-sm">
               <img style="  width: 347px;height: 180px;object-fit: cover;" src="{{ upcomingVideo.thumbnail }}" alt="url">
-                 <img src="{{ upcomingVideo.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 8px;bottom: 80px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
+                 <img src="{{ upcomingVideo.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 12px;bottom: 125px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
                  </a>
+
               <div class="card-body">
-                <p style="  white-space: nowrap; overflow: hidden;text-overflow: ellipsis; max-width: 200px;" class="card-text">{{ upcomingVideo.title }}</p>
+                <div style="height: 65px;margin-top: 10px;">
+                  <p style="display: -webkit-box;
+                  /* webkit only works on a few browsers */
+                  -webkit-line-clamp: 2;
+                  -webkit-box-orient: vertical;
+                  overflow: hidden;">{{ upcomingVideo.title }}</p>
+                </div>
                 <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="https://www.youtube.com/watch?v={{ upcomingVideo.videoId }}"><button type="button" class="btn btn-sm btn-outline-info">In {{ upcomingVideo.scheduledStartTime|timeuntil|upto:',' }}</button></a>
+                  </div>
                   <small class="text-muted">{{ upcomingVideo.scheduledStartTime }}</small>
                 </div>
               </div>
@@ -68,15 +78,8 @@
           
         </div>
       </div>
+      <hr class="mb-4">
     </div>
-  
-  
-  
-    <section class="jumbotron text-center">
-      <div class="container">
-        <h1>Recently Ended Live Streams</h1>
-      </div>
-    </section>
     
     <div class="album py-5 bg-light">
         <div class="container">
@@ -88,12 +91,21 @@
           <a href="https://www.youtube.com/watch?v={{ recentlyEndedStream.videoId }}">
             <div class="card mb-4 shadow-sm">
               <img style="  width: 347px;height: 180px;object-fit: cover;" src="{{ recentlyEndedStream.thumbnail }}" alt="url">
-                 <img src="{{ recentlyEndedStream.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 8px;bottom: 60px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
+                 <img src="{{ recentlyEndedStream.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 12px;bottom: 125px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
                  </a>
               <div class="card-body">
-                <p style="  white-space: nowrap; overflow: hidden;text-overflow: ellipsis; max-width: 200px;" class="card-text">{{ recentlyEndedStream.title }}</p>
+                <div style="height: 65px;margin-top: 10px;">
+                  <p style="display: -webkit-box;
+                  /* webkit only works on a few browsers */
+                  -webkit-line-clamp: 2;
+                  -webkit-box-orient: vertical;
+                  overflow: hidden;">{{ recentlyEndedStream.title }}</p>
+                </div>
                 <div class="d-flex justify-content-between align-items-center">
-                  <small class="text-muted">{{ urecentlyEndedStream.publishedAt }}</small>
+                  <div class="btn-group">
+                    <a href="https://www.youtube.com/watch?v={{ recentlyEndedStream.videoId }}"><button type="button" class="btn btn-sm btn-outline-secondary">{{ recentlyEndedStream.actualStartTime|timesince|upto:',' }} ago</button></a>
+                  </div>
+                  <small class="text-muted">{{ recentlyEndedStream.actualStartTime }}</small>
                 </div>
               </div>
             </div>
