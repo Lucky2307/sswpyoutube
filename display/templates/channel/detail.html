@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 
+{% load my_tags %}
 {% block title %}
 <title>
     {{selectedChannel.name}}
@@ -55,45 +56,61 @@ margin-bottom: .25rem;
     </p>
   </div>
 </section>
-
-{% if messages %}
-<div class="py-5 text-center">
-  <h2>Info:</h2>
-  {% for message in messages %}
-  <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-  {% endfor %}
-</div>
-{% endif %}
 <hr class="mb-4">
-
-  <section class="jumbotron text-center">
-    <div class="container">
-      <h1>Currently Live Broadcast</h1>
-      <p class="lead text-muted">lorem ipsum dolor sit amet homina homina homina homina homina.</p>
-      <p>
-        <a href="#" class="btn btn-primary my-2">Main call to action</a>
-        <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-      </p>
-    </div>
-  </section>
   
   <div class="album py-5 bg-light">
       <div class="container">
   
         <div class="row">
   
-          {% for liveVideo in liveVideos %}
+          {% for video in recentVideos %}
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
-              <img src="{{ liveVideo.thumbnail }}" alt="url">
+              <a href="https://www.youtube.com/watch?v={{ video.videoId }}">
+              <img style="  width: 347px;height: 180px;object-fit: cover;" src="{{ video.thumbnail }}" alt="url">
+              </a>
+              <a href="https://www.youtube.com/channel/{{ video.channelId.channelId }}">
+                 <img src="{{ video.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 12px;bottom: 125px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
+              </a>
               <div class="card-body">
-                <p class="card-text">{{ liveVideo.title }}</p>
+                <div style="height: 65px;margin-top: 10px;">
+                  <p style="display: -webkit-box;
+                  /* webkit only works on a few browsers */
+                  -webkit-line-clamp: 2;
+                  -webkit-box-orient: vertical;
+                  overflow: hidden;">{{ video.title }}</p>
+                </div>
                 <div class="d-flex justify-content-between align-items-center">
+                  {% if video.liveBroadcastContent == "live" %}
                   <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    <a href="https://www.youtube.com/watch?v={{ video.videoId }}"><button type="button" class="btn btn-sm btn-outline-danger">Live</button></a>
                   </div>
-                  <small class="text-muted">{{liveVideo.actualStartTime}}</small>
+                  <small class="text-muted">{{video.actualStartTime}}</small>
+                  {% elif video.liveBroadcastContent == "upcoming" %}
+                  <div class="btn-group">
+                    <a href="https://www.youtube.com/watch?v={{ video.videoId }}"><button type="button" class="btn btn-sm btn-outline-info">In {{ video.scheduledStartTime|timeuntil|upto:',' }}</button></a>
+                  </div>
+                  <small class="text-muted">{{video.scheduledStartTime}}</small>
+                  {% else %}
+                  <div class="btn-group">
+                    <a href="https://www.youtube.com/watch?v={{ video.videoId }}"><button type="button" class="btn btn-sm btn-outline-secondary">
+                      {% if video.actualStartTime %}
+                      {{ video.actualStartTime|timesince|upto:',' }} ago
+                      {% else %}
+                      {{ video.publishedAt|timesince|upto:',' }} ago
+                      {% endif %}
+                    </button></a>
+                  </div>
+                  <small class="text-muted">
+                    {% if video.actualStartTime %}
+                      {{ video.actualStartTime }}
+                    {% elif video.scheduledStartTime %}
+                      {{ video.scheduledStartTime }}
+                    {% else %}
+                      {{ video.publishedAt }}
+                    {% endif %}
+                  </small>
+                  {% endif %}
                 </div>
               </div>
             </div>
@@ -103,85 +120,4 @@ margin-bottom: .25rem;
         </div>
       </div>
     </div>
-  
-  
-  
-  
-  <section class="jumbotron text-center">
-    <div class="container">
-      <h1>Upcoming Live Streams</h1>
-      <p class="lead text-muted">lorem ipsum dolor sit amet homina homina homina homina homina.</p>
-      <p>
-        <a href="#" class="btn btn-primary my-2">Main call to action</a>
-        <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-      </p>
-    </div>
-  </section>
-  
-  <div class="album py-5 bg-light">
-      <div class="container">
-  
-        <div class="row">
-  
-          {% for upcomingVideo in upcomingVideos %}
-          <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-              <img src="{{ upcomingVideo.thumbnail }}" alt="url">
-              <div class="card-body">
-                <p class="card-text">{{ upcomingVideo.title }}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-muted">{{upcomingVideo.scheduledStartTime}}</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-          
-        </div>
-      </div>
-    </div>
-  
-  
-  
-    <section class="jumbotron text-center">
-      <div class="container">
-        <h1>Recently Ended Live Streams</h1>
-        <p class="lead text-muted">lorem ipsum dolor sit amet homina homina homina homina homina.</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">Main call to action</a>
-          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-        </p>
-      </div>
-    </section>
-    
-    <div class="album py-5 bg-light">
-        <div class="container">
-    
-          <div class="row">
-    
-            {% for recentlyEndedStream in recentlyEndedStreams %}
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                <img src="{{ recentlyEndedStream.thumbnail }}" alt="url">
-                <div class="card-body">
-                  <p class="card-text">{{ recentlyEndedStream.title }}</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-muted">{{recentlyEndedStream.publishedAt}}</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {% endfor %}
-            
-          </div>
-        </div>
-      </div>
   {% endblock %}

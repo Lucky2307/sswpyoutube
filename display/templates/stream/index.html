@@ -15,11 +15,13 @@
   
           {% for liveVideo in liveVideos %}
           <div class="col-md-4">
-          <a href="https://www.youtube.com/watch?v={{ liveVideo.videoId }}">
             <div class="card mb-4 shadow-sm">
-              <img style="  width: 347px;height: 180px;object-fit: cover;" src="{{ liveVideo.thumbnail }}" alt="url">
-                 <img src="{{ liveVideo.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 12px;bottom: 125px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
-                 </a>
+              <a href="https://www.youtube.com/watch?v={{ liveVideo.videoId }}">
+                <img style="  width: 347px;height: 180px;object-fit: cover;" src="{{ liveVideo.thumbnail }}" alt="url">
+                </a>
+                <a href="https://www.youtube.com/channel/{{ liveVideo.channelId.channelId }}">
+                   <img src="{{ liveVideo.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 12px;bottom: 125px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
+                </a>
               <div class="card-body">
                 <div style="height: 65px;margin-top: 10px;">
                   <p style="display: -webkit-box;
@@ -51,11 +53,13 @@
   
           {% for upcomingVideo in upcomingVideos %}
           <div class="col-md-4">
-          <a href="https://www.youtube.com/watch?v={{ upcomingVideo.videoId }}">
             <div class="card mb-4 shadow-sm">
-              <img style="  width: 347px;height: 180px;object-fit: cover;" src="{{ upcomingVideo.thumbnail }}" alt="url">
-                 <img src="{{ upcomingVideo.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 12px;bottom: 125px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
-                 </a>
+              <a href="https://www.youtube.com/watch?v={{ upcomingVideo.videoId }}">
+                <img style="  width: 347px;height: 180px;object-fit: cover;" src="{{ upcomingVideo.thumbnail }}" alt="url">
+                </a>
+                <a href="https://www.youtube.com/channel/{{ upcomingVideo.channelId.channelId }}">
+                   <img src="{{ upcomingVideo.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 12px;bottom: 125px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
+                </a>
 
               <div class="card-body">
                 <div style="height: 65px;margin-top: 10px;">
@@ -88,11 +92,13 @@
     
             {% for recentlyEndedStream in recentlyEndedStreams %}
           <div class="col-md-4">
-          <a href="https://www.youtube.com/watch?v={{ recentlyEndedStream.videoId }}">
             <div class="card mb-4 shadow-sm">
-              <img style="  width: 347px;height: 180px;object-fit: cover;" src="{{ recentlyEndedStream.thumbnail }}" alt="url">
-                 <img src="{{ recentlyEndedStream.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 12px;bottom: 125px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
-                 </a>
+              <a href="https://www.youtube.com/watch?v={{ recentlyEndedStream.videoId }}">
+                <img style="  width: 347px;height: 180px;object-fit: cover;" src="{{ recentlyEndedStream.thumbnail }}" alt="url">
+                </a>
+                <a href="https://www.youtube.com/channel/{{ recentlyEndedStream.channelId.channelId }}">
+                   <img src="{{ recentlyEndedStream.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 12px;bottom: 125px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
+                </a>
               <div class="card-body">
                 <div style="height: 65px;margin-top: 10px;">
                   <p style="display: -webkit-box;
@@ -103,9 +109,21 @@
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <a href="https://www.youtube.com/watch?v={{ recentlyEndedStream.videoId }}"><button type="button" class="btn btn-sm btn-outline-secondary">{{ recentlyEndedStream.actualStartTime|timesince|upto:',' }} ago</button></a>
+                    <a href="https://www.youtube.com/watch?v={{ recentlyEndedStream.videoId }}"><button type="button" class="btn btn-sm btn-outline-secondary">
+                      {% if recentlyEndedStream.actualStartTime %}
+                      {{ recentlyEndedStream.actualStartTime|timesince|upto:',' }} ago
+                      {% else %}
+                      {{ recentlyEndedStream.publishedAt|timesince|upto:',' }} ago
+                      {% endif %}
+                    </button></a>
                   </div>
-                  <small class="text-muted">{{ recentlyEndedStream.actualStartTime }}</small>
+                  <small class="text-muted">
+                    {% if recentlyEndedStream.actualStartTime %}
+                      {{ recentlyEndedStream.actualStartTime }}
+                    {% else %}
+                      {{ recentlyEndedStream.publishedAt }}
+                    {% endif %}
+                  </small>
                 </div>
               </div>
             </div>

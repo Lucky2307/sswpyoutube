@@ -48,21 +48,12 @@ def channelDetail(request, channelId):
         messages.info(request, 'Channel associated with the ID not found on our database.')
         # don't forget to implement the message in the template
         return HttpResponseRedirect(reverse('channel-index'))
-
-    upcomingVideos = Video.objects.filter(channelId=selectedChannel, liveBroadcastContent='upcoming')
-    liveVideos = Video.objects.filter(channelId=selectedChannel, liveBroadcastContent='live')
-
-    # still sceptical about this one, if its gte, does it also include 
-    # every video in the future? of course i filtered with liveBroadcastContent='none'.
-    # but still unsure nonetheless
-    how_many_hours = 6
-    recentlyEndedStreams = Video.objects.filter(channelId=selectedChannel, liveBroadcastContent='none', publishedAt__gte=datetime.now()-timedelta(hours=how_many_hours))
+        
+    recentVideos = Video.objects.filter(channelId=selectedChannel, publishedAt__gte=datetime.now()-timedelta(days=7))
 
     data = {
-        'selectedChannel':selectedChannel,
-        'upcomingVideos':upcomingVideos,
-        'liveVideos':liveVideos,
-        'recentlyEndedStreams':recentlyEndedStreams,
+        'selectedChannel': selectedChannel,
+        'recentVideos':recentVideos,
     }
 
     return render(request, 'channel/detail.html', context=data)
