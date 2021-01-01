@@ -1,0 +1,136 @@
+{% extends 'base/base.html' %}
+{% load my_tags %}
+
+{% block title %}
+<title>
+    SSWP YouTube
+</title>
+{% endblock %}
+
+{% block content %}
+  
+  <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="row">
+  
+          {% for liveVideo in liveVideos %}
+          <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+              <a href="https://www.youtube.com/watch?v={{ liveVideo.videoId }}">
+                <img style="  width: 347px;height: 180px;object-fit: cover;" src="{{ liveVideo.thumbnail }}" alt="url">
+                </a>
+                <a href="https://www.youtube.com/channel/{{ liveVideo.channelId.channelId }}">
+                   <img src="{{ liveVideo.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 12px;bottom: 125px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
+                </a>
+              <div class="card-body">
+                <div style="height: 65px;margin-top: 10px;">
+                  <p style="display: -webkit-box;
+                  /* webkit only works on a few browsers */
+                  -webkit-line-clamp: 2;
+                  -webkit-box-orient: vertical;
+                  overflow: hidden;">{{ liveVideo.title }}</p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="https://www.youtube.com/watch?v={{ liveVideo.videoId }}"><button type="button" class="btn btn-sm btn-outline-danger">Live</button></a>
+                  </div>
+                  <small class="text-muted">{{liveVideo.actualStartTime}}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          
+        </div>
+      </div>
+      <hr class="mb-4">
+    </div>
+  
+  <div class="album py-5 bg-light">
+      <div class="container">
+  
+        <div class="row">
+  
+          {% for upcomingVideo in upcomingVideos %}
+          <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+              <a href="https://www.youtube.com/watch?v={{ upcomingVideo.videoId }}">
+                <img style="  width: 347px;height: 180px;object-fit: cover;" src="{{ upcomingVideo.thumbnail }}" alt="url">
+                </a>
+                <a href="https://www.youtube.com/channel/{{ upcomingVideo.channelId.channelId }}">
+                   <img src="{{ upcomingVideo.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 12px;bottom: 125px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
+                </a>
+
+              <div class="card-body">
+                <div style="height: 65px;margin-top: 10px;">
+                  <p style="display: -webkit-box;
+                  /* webkit only works on a few browsers */
+                  -webkit-line-clamp: 2;
+                  -webkit-box-orient: vertical;
+                  overflow: hidden;">{{ upcomingVideo.title }}</p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="https://www.youtube.com/watch?v={{ upcomingVideo.videoId }}"><button type="button" class="btn btn-sm btn-outline-info">In {{ upcomingVideo.scheduledStartTime|timeuntil|upto:',' }}</button></a>
+                  </div>
+                  <small class="text-muted">{{ upcomingVideo.scheduledStartTime }}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          
+        </div>
+      </div>
+      <hr class="mb-4">
+    </div>
+    
+    <div class="album py-5 bg-light">
+        <div class="container">
+    
+          <div class="row">
+    
+            {% for recentlyEndedStream in recentlyEndedStreams %}
+          <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+              <a href="https://www.youtube.com/watch?v={{ recentlyEndedStream.videoId }}">
+                <img style="  width: 347px;height: 180px;object-fit: cover;" src="{{ recentlyEndedStream.thumbnail }}" alt="url">
+                </a>
+                <a href="https://www.youtube.com/channel/{{ recentlyEndedStream.channelId.channelId }}">
+                   <img src="{{ recentlyEndedStream.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 12px;bottom: 125px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
+                </a>
+              <div class="card-body">
+                <div style="height: 65px;margin-top: 10px;">
+                  <p style="display: -webkit-box;
+                  /* webkit only works on a few browsers */
+                  -webkit-line-clamp: 2;
+                  -webkit-box-orient: vertical;
+                  overflow: hidden;">{{ recentlyEndedStream.title }}</p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="https://www.youtube.com/watch?v={{ recentlyEndedStream.videoId }}"><button type="button" class="btn btn-sm btn-outline-secondary">
+                      {% if recentlyEndedStream.actualStartTime %}
+                      {{ recentlyEndedStream.actualStartTime|timesince|upto:',' }} ago
+                      {% else %}
+                      {{ recentlyEndedStream.publishedAt|timesince|upto:',' }} ago
+                      {% endif %}
+                    </button></a>
+                  </div>
+                  <small class="text-muted">
+                    {% if recentlyEndedStream.actualStartTime %}
+                      {{ recentlyEndedStream.actualStartTime }}
+                    {% else %}
+                      {{ recentlyEndedStream.publishedAt }}
+                    {% endif %}
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+            {% endfor %}
+            
+          </div>
+        </div>
+      </div>
+{% endblock %}
