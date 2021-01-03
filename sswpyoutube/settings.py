@@ -138,8 +138,8 @@ os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 
 # CELERY CONFIG
 from celery.schedules import crontab 
-CELERY_BROKER_URL = 'redis://localhost:6379'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+# CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_BROKER_URL = 'redis://:pb8f4f036695aea11ff3a79ab4454abd05c33a74e9d25db56ed863c4503280376@ec2-35-169-38-177.compute-1.amazonaws.com:18729'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
