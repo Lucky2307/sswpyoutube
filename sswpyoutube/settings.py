@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'youtubeapi',
-    'display'
+    'display',
+
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +135,22 @@ STATICFILES_DIRS = [
 # no idea, should i be worried? perhaps, do i know any other solution?
 # too bad
 os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
+
+# CELERY CONFIG
+from celery.schedules import crontab 
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Jakarta'
+CELERY_BEAT_SCHEDULE = {
+    'refresh-feeds-every-15-mins': { 
+        'task': 'youtubeapi.tasks.refreshFeedsBackground', 
+        'schedule': 900.0,
+    },
+    'refresh-watchlist-every-5-mins': { 
+        'task': 'youtubeapi.tasks.refreshWatchlistBackground', 
+        'schedule': 300.0,
+    }
+}
