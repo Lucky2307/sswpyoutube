@@ -1,11 +1,12 @@
 from googleapiclient.discovery import build
+import os
 
 import youtubeapi.controllers.debug_helper as debug_helper
 
 # don't forget to hide this key post-deployment
-API_KEY = 'AIzaSyAL8iJZSXRd6iu-yhiMeu9osvMZX1XKjKE'
+GOOGLE_API_KEY = str(os.getenv('GOOGLE_API_KEY'))
 
-youtube = build('youtube', 'v3', developerKey=API_KEY)
+youtube = build('youtube', 'v3', developerKey=GOOGLE_API_KEY)
 
 def fetchChannelAPI(channelId): # 1 unit per call
     api_request = youtube.channels().list(
