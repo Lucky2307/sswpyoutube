@@ -1,5 +1,5 @@
 from django.urls import path
-from .controllers import livestreams, channels, language
+from .controllers import livestreams, channels, language, agencies
 
 urlpatterns = [
     path('videos/feeds/', livestreams.videosIndex, name='videos-index'),
@@ -13,4 +13,7 @@ urlpatterns = [
 
     path('language/all/', language.languageIndex, name='language-index'),
     path('language/delete/<int:id>', language.DeleteLanguage, name='language-delete'),
+
+    path('agency/all/', agencies.agencyIndex, name='agency-index'),
+    path('agency/delete/<int:id>', agencies.DeleteAgency, name='agency-delete'),
 ]
