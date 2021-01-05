@@ -5,8 +5,8 @@ from youtubeapi.models.channel import Channel
 class Video(models.Model):
     BROADCAST_STATUS = [
         ('live', 'Live'),
-        ('none', 'Archived'),
         ('upcoming', 'Upcoming'),
+        ('none', 'Archived'),
     ]
 
     videoId = models.CharField(max_length=100, primary_key=True)

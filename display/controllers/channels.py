@@ -49,7 +49,7 @@ def channelDetail(request, channelId):
         # don't forget to implement the message in the template
         return HttpResponseRedirect(reverse('channel-index'))
         
-    recentVideos = Video.objects.filter(channelId=selectedChannel, publishedAt__gte=datetime.now()-timedelta(days=7))
+    recentVideos = Video.objects.filter(channelId=selectedChannel, publishedAt__gte=datetime.now()-timedelta(days=7)).order_by('liveBroadcastContent')
 
     data = {
         'selectedChannel': selectedChannel,
