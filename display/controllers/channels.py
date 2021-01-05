@@ -12,6 +12,7 @@ from youtubeapi.models.video import Video
 from youtubeapi.controllers.helper import isChannelExist, saveNewChannel
 
 from display.forms.find_channel_form import findChannelForm
+from display.forms.channel_form import UpdateChannelForm
 
 def channelsIndex(request):
 
@@ -72,7 +73,7 @@ def confirmSaveChannel(request, channelId):
     if request.method == 'POST':
         numOfVids = saveNewChannel(channelId)
         if numOfVids:
-            return HttpResponseRedirect(reverse('channel-detail', args=[channelId]))
+            return HttpResponseRedirect(reverse('channel-update', args=[channelId]))
         else:
             return HttpResponseRedirect(reverse('channel-index'))
 
@@ -86,3 +87,19 @@ def confirmSaveChannel(request, channelId):
         else:
             print("Channel not found")
             return HttpResponseRedirect(reverse('channel-index'))
+
+def UpdateChannel(request, channelId):
+
+    channel = Channel.objects.get(pk=channelId)
+    form = UpdateChannelForm(instance=channel)
+
+    if request.method == 'POST':
+        form = UpdateChannelForm(request.POST, instance=channel)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('channel-detail', args=[channelId]))
+    context = {
+        'selectedChannel':channel,
+        'form':form,
+    }
+    return render(request, 'channel/update_form.html', context)
