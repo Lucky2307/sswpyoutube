@@ -127,9 +127,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/images/'
+
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
+
+MEDIA_ROOT = BASE_DIR / 'static/images'
 
 # the async functions only work with this setting, what are the consequences?
 # no idea, should i be worried? perhaps, do i know any other solution?
