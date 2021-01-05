@@ -2,6 +2,8 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render
 from django.contrib import messages
+from django.core.paginator import Paginator
+
 
 from datetime import datetime, timedelta
 
@@ -49,11 +51,15 @@ def channelDetail(request, channelId):
         # don't forget to implement the message in the template
         return HttpResponseRedirect(reverse('channel-index'))
         
-    recentVideos = Video.objects.filter(channelId=selectedChannel, publishedAt__gte=datetime.now()-timedelta(days=7)).order_by('liveBroadcastContent')
+    recentVideos = Video.objects.filter(channelId=selectedChannel).order_by('liveBroadcastContent')
+    paginator = Paginator(recentVideos, 15)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     data = {
         'selectedChannel': selectedChannel,
-        'recentVideos':recentVideos,
+        'page_obj':page_obj,
     }
 
     return render(request, 'channel/detail.html', context=data)

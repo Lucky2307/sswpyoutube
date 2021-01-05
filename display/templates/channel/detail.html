@@ -57,13 +57,16 @@ margin-bottom: .25rem;
   </div>
 </section>
 <hr class="mb-4">
-  
+
   <div class="album py-5 bg-light">
+
+    {% include 'base/paginator.html' %}
+
       <div class="container">
   
         <div class="row">
   
-          {% for video in recentVideos %}
+          {% for video in page_obj %}
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
               <a href="https://www.youtube.com/watch?v={{ video.videoId }}">
@@ -119,5 +122,6 @@ margin-bottom: .25rem;
           
         </div>
       </div>
+      {% include 'base/paginator.html' %}
     </div>
   {% endblock %}
