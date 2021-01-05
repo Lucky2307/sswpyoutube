@@ -1,6 +1,7 @@
 {% url 'videos-index' as videos_index_url %}
 {% url 'channel-index' as channel_index_url %}
 {% url 'videos-archive' as videos_archive_url %}
+{% url 'language-index' as language_index_url %}
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="{{ videos_index_url }}">Holoinfo</a>
@@ -17,6 +18,9 @@
         </li>
         <li class="nav-item {% if request.path == videos_archive_url %} active {%endif%}">
           <a class="nav-link" href="{{ videos_archive_url }}">Archive</a>
+        </li>
+        <li class="nav-item {% if request.path == language_index_url %} active {%endif%}">
+          <a class="nav-link" href="{{ language_index_url }}">Languages</a>
         </li>
       </ul>
     </div>
