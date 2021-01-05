@@ -8,8 +8,8 @@ class Agency(models.Model):
     if a channel doesn't belong in an agency, (null)
     they're an indie
     """
-    name = models.CharField(max_length=100)
-    icon = models.ImageField(null=True, blank=True, upload_to='agencies/')
+    name = models.CharField(max_length=100, null=False)
+    icon = models.ImageField(null=True, blank=False, upload_to='agencies/')
 
     class Meta:
         app_label = 'youtubeapi'

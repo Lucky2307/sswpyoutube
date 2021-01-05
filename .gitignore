@@ -1,3 +1,5 @@
+static/images/agencies/*
+static/images/flags_icon/*
 db.sqlite3
 __pycache__
 sswpyoutube/__pycache__
