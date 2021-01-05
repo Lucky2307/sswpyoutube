@@ -3,6 +3,7 @@ from .controllers import livestreams, channels
 
 urlpatterns = [
     path('videos/feeds/', livestreams.videosIndex, name='videos-index'),
+    path('videos/archive/', livestreams.archivedVideosView, name='videos-archive'),
 
     path('channel/all/', channels.channelsIndex, name='channel-index'),
     path('channel/<str:channelId>/', channels.channelDetail, name='channel-detail'),

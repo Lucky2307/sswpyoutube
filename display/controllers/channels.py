@@ -34,10 +34,14 @@ def channelsIndex(request):
         form = findChannelForm()
     
     channels = Channel.objects.all()
+    paginator = Paginator(channels, 15)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     data = {
         'form':form,
-        'channels':channels,
+        'page_obj':page_obj,
     }
 
     return render(request, 'channel/index.html', context=data)
@@ -51,7 +55,7 @@ def channelDetail(request, channelId):
         # don't forget to implement the message in the template
         return HttpResponseRedirect(reverse('channel-index'))
         
-    recentVideos = Video.objects.filter(channelId=selectedChannel).order_by('liveBroadcastContent')
+    recentVideos = Video.objects.filter(channelId=selectedChannel).order_by('-publishedAt')
     paginator = Paginator(recentVideos, 15)
 
     page_number = request.GET.get('page')
