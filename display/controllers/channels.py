@@ -103,3 +103,9 @@ def UpdateChannel(request, channelId):
         'form':form,
     }
     return render(request, 'channel/update_form.html', context)
+
+def DeleteChannel(request, channelId):
+
+    channel = Channel.objects.get(pk=channelId)
+    channel.delete()
+    return HttpResponseRedirect(reverse('channel-index'))
