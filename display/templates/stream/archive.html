@@ -13,8 +13,28 @@
 padding-top: 3rem;
 padding-bottom: 3rem;
 margin-bottom: 0;
-background-color: #fff;
+background-color: #519de8;
 }
+
+.card-body {
+    background-color:#519de8;
+    color:white;
+}
+.btn-outline-secondary {
+    color: #fff;
+    border-color: #fff;
+}
+.text-muted {
+    color: #fff!important;
+}
+.dark-mode {
+    background-color: #2f2f2f;
+}
+body.dark-mode {
+  background-color: #2f2f2f;
+  color:white;
+}
+
 @media (min-width: 768px) {
 .jumbotron {
   padding-top: 6rem;
@@ -47,14 +67,13 @@ margin-bottom: .25rem;
 
 {% block content %}
 
-<section class="jumbotron text-center">
-  <div class="container">
-    <h1>Archived Videos</h1>
-  </div>
-</section>
+    <div class="py-5 text-center">
+      <h2>Archived Videos</h2>
+      <p class="lead">Below are some of the Arcived Video.</p>
+    </div>
 <hr class="mb-4">
 
-  <div class="album py-5 bg-light">
+  <div class="album py-5">
 
     {% include 'base/paginator.html' %}
 
@@ -71,7 +90,7 @@ margin-bottom: .25rem;
               <a href="https://www.youtube.com/channel/{{ video.channelId.channelId }}">
                  <img src="{{ video.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 12px;bottom: 125px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
               </a>
-              <div class="card-body">
+              <div class="card-body" id="card">
                 <div style="height: 65px;margin-top: 10px;">
                   <p style="display: -webkit-box;
                   /* webkit only works on a few browsers */
