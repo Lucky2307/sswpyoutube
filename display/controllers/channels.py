@@ -10,6 +10,7 @@ from youtubeapi.controllers.helper import isChannelExist, saveNewChannel
 
 from display.forms.find_channel_form import findChannelForm
 from display.forms.channel_form import UpdateChannelForm
+from display.filters import OrderChannel
 
 def channelsIndex(request):
 
@@ -30,7 +31,11 @@ def channelsIndex(request):
     else:
         form = findChannelForm()
     
-    channels = Channel.objects.all()
+    channels = Channel.objects.all().order_by('name')
+
+    myFilter = OrderChannel(request.GET, queryset=channels)
+    channels = myFilter.qs
+
     paginator = Paginator(channels, 15)
 
     page_number = request.GET.get('page')
@@ -39,6 +44,7 @@ def channelsIndex(request):
     data = {
         'form':form,
         'page_obj':page_obj,
+        'myFilter': myFilter,
     }
 
     return render(request, 'channel/index.html', context=data)

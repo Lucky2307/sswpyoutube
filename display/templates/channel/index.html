@@ -45,8 +45,33 @@
   </div>
 
   <div class="container marketing">
-    {% include 'base/paginator.html' %}
 
+    <div class="row mb-4">
+          <div class="card card-body">
+
+            <form action="" method="get">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="name">Name contains:</label>
+                    {{myFilter.form.name}}
+                  </div>
+                <div class="form-group col-md-6">
+                  <label for="name">Agency:</label>
+                  {{myFilter.form.agency}}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name">Language(s)</label>
+                  {{myFilter.form.language}}
+              </div>
+              <button class="btn btn-primary" type="submit">
+                Filter
+              </button>
+            </form>
+          </div>
+        </div>
+
+        {% include 'base/paginator.html' %}
     <!-- Three columns of text below the carousel -->
     <div class="row">
     {% for channel in page_obj %}
