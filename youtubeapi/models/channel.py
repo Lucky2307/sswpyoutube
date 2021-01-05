@@ -8,8 +8,8 @@ class Channel(models.Model):
     name = models.CharField(max_length=100)
     icon = models.CharField(max_length=100, null=True) # nullable, new channel might not have thumbnail in youtube api
     uploadPlaylist = models.CharField(max_length=100, null=True) # nullable, new channel might not have a video
-    language = models.ManyToManyField(Language)
-    agency = models.ForeignKey(Agency, null=True, on_delete=models.SET_NULL)
+    language = models.ManyToManyField(Language, blank=True)
+    agency = models.ForeignKey(Agency, null=True, blank=True, on_delete=models.SET_NULL)
 
     class Meta:
         app_label = 'youtubeapi'

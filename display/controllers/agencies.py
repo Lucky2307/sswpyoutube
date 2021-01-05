@@ -37,4 +37,5 @@ def DeleteAgency(request, id):
 
     agency = Agency.objects.get(pk=id)
     agency.delete()
+    messages.success(request, 'Deleted agency %s.' % agency)
     return HttpResponseRedirect(reverse('agency-index'))

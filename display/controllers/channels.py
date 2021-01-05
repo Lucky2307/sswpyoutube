@@ -27,7 +27,6 @@ def channelsIndex(request):
                 # display in another page
                 return HttpResponseRedirect(reverse('channel-detail', args=[channelId]))
             except:
-                # print("channel not found in db")
                 # check if its a valid youtube channel, and asks if user want to save it and crawl it
                 return HttpResponseRedirect(reverse('confirm-save-channel', args=[channelId]))
 
@@ -52,8 +51,7 @@ def channelDetail(request, channelId):
         selectedChannel = Channel.objects.get(pk=channelId)
     except:
         # the user isn't supposed to write the url manually
-        messages.info(request, 'Channel associated with the ID not found on our database.')
-        # don't forget to implement the message in the template
+        messages.error(request, 'Channel associated with the ID not found on our database.')
         return HttpResponseRedirect(reverse('channel-index'))
         
     recentVideos = Video.objects.filter(channelId=selectedChannel).order_by('-publishedAt')
@@ -72,10 +70,8 @@ def channelDetail(request, channelId):
 def confirmSaveChannel(request, channelId):
     if request.method == 'POST':
         numOfVids = saveNewChannel(channelId)
-        if numOfVids:
-            return HttpResponseRedirect(reverse('channel-update', args=[channelId]))
-        else:
-            return HttpResponseRedirect(reverse('channel-index'))
+        messages.success(request, 'Channel saved. %d archived video(s) found.' % (numOfVids))
+        return HttpResponseRedirect(reverse('channel-update', args=[channelId]))
 
     else:
         channelTuple = isChannelExist(channelId)
@@ -85,7 +81,7 @@ def confirmSaveChannel(request, channelId):
             }
             return render(request, 'channel/confirm_save_channel.html', context=data)
         else:
-            print("Channel not found")
+            messages.error(request, 'Channel associated with the ID not found on our database nor on YouTube.')
             return HttpResponseRedirect(reverse('channel-index'))
 
 def UpdateChannel(request, channelId):
@@ -97,6 +93,7 @@ def UpdateChannel(request, channelId):
         form = UpdateChannelForm(request.POST, instance=channel)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Channel updated.')
             return HttpResponseRedirect(reverse('channel-detail', args=[channelId]))
     context = {
         'selectedChannel':channel,
@@ -108,4 +105,5 @@ def DeleteChannel(request, channelId):
 
     channel = Channel.objects.get(pk=channelId)
     channel.delete()
+    messages.success(request, 'Channel %s deleted.' % channel)
     return HttpResponseRedirect(reverse('channel-index'))

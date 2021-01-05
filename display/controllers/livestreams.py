@@ -1,7 +1,4 @@
-from django.http import HttpResponseRedirect
-from django.urls import reverse
 from django.shortcuts import render
-from django.contrib import messages
 from django.core.paginator import Paginator
 
 from datetime import datetime, timedelta

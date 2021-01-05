@@ -14,8 +14,10 @@ class UpdateChannelForm(forms.ModelForm):
     language = forms.ModelMultipleChoiceField(
         queryset=Language.objects.all(),
         widget=forms.SelectMultiple(attrs={'class': 'form-control'}),
+        required=False,
     )
     agency = forms.ModelChoiceField(
         queryset=Agency.objects.all(),
         widget=forms.Select(attrs={'class': 'form-control'}),
+        required=False,
     )

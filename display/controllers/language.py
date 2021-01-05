@@ -37,4 +37,5 @@ def DeleteLanguage(request, id):
 
     language = Language.objects.get(pk=id)
     language.delete()
+    messages.success(request, 'Deleted language %s.' % language)
     return HttpResponseRedirect(reverse('language-index'))
