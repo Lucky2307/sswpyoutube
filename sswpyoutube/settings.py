@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 from django.urls import reverse_lazy
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'w5@#lv4!08jtp7ikyxs^#e7jkrwpp82juck=6^^6p__$^=bx6&'
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -45,7 +47,9 @@ INSTALLED_APPS = [
     'sswpyoutube',
     'user',
     'youtubeapi',
-    'display'
+    'display',
+
+    'django_filters'
 ]
 
 MIDDLEWARE = [
@@ -119,7 +123,7 @@ AUTHENTICATION_BACKENDS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Jakarta'
+TIME_ZONE = str(os.getenv('TIME_ZONE'))
 
 USE_I18N = True
 
@@ -133,6 +137,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/images/'
+
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
@@ -145,6 +151,8 @@ EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = 'sswpit3@gmail.com'
 EMAIL_HOST_USER = 'sswpit3@gmail.com'
 EMAIL_HOST_PASSWORD = 'SSWPyoutube3'
+
+MEDIA_ROOT = BASE_DIR / 'static/images'
 
 # the async functions only work with this setting, what are the consequences?
 # no idea, should i be worried? perhaps, do i know any other solution?
