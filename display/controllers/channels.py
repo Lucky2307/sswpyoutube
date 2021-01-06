@@ -3,6 +3,8 @@ from django.urls import reverse
 from django.shortcuts import render
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.decorators import login_required
+login_required = login_required(login_url='user:login')
 
 from youtubeapi.models.channel import Channel
 from youtubeapi.models.video import Video
@@ -75,6 +77,7 @@ def channelDetail(request, channelId):
 
     return render(request, 'channel/detail.html', context=data)
 
+@login_required
 def confirmSaveChannel(request, channelId):
     if request.method == 'POST':
         numOfVids = saveNewChannel(channelId)
@@ -92,6 +95,7 @@ def confirmSaveChannel(request, channelId):
             messages.error(request, 'Channel associated with the ID not found on our database nor on YouTube.')
             return HttpResponseRedirect(reverse('channel-index'))
 
+@login_required
 def UpdateChannel(request, channelId):
 
     channel = Channel.objects.get(pk=channelId)
@@ -109,6 +113,7 @@ def UpdateChannel(request, channelId):
     }
     return render(request, 'channel/update_form.html', context)
 
+@login_required
 def DeleteChannel(request, channelId):
 
     channel = Channel.objects.get(pk=channelId)
