@@ -4,7 +4,7 @@ _A website that keeps track of virtual YouTubers and their live streaming activi
 ## Quickstart
 Install the dependencies listed in requirements.txt:
 ```bash
-pip install -r
+pip install -r requirements.txt
 ```
 
 Make the migrations and then migrate them:
