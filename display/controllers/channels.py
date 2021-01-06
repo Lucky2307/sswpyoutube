@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render
 from django.contrib import messages
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from youtubeapi.models.channel import Channel
 from youtubeapi.models.video import Video
@@ -31,19 +31,24 @@ def channelsIndex(request):
     else:
         form = findChannelForm()
     
-    channels = Channel.objects.all().order_by('name')
+    channels_list = Channel.objects.all().order_by('name')
 
-    myFilter = OrderChannel(request.GET, queryset=channels)
-    channels = myFilter.qs
+    myFilter = OrderChannel(request.GET, queryset=channels_list)
+    channels_list = myFilter.qs
 
-    paginator = Paginator(channels, 15)
+    paginator = Paginator(channels_list, 15)
 
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
+    page = request.GET.get('page', 1)
+    try:
+        page_obj = paginator.page(page)
+    except PageNotAnInteger:
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        page_obj = paginator.page(paginator.page_number)
     data = {
         'form':form,
         'page_obj':page_obj,
+        'paginator':paginator,
         'myFilter': myFilter,
     }
 
