@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'youtubeapi',
     'display',
 
-    'django_filters'
+    'django_filters',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -146,11 +147,11 @@ STATICFILES_DIRS = [
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = str(os.getenv('EMAIL_HOST'))
 EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = 'sswpit3@gmail.com'
-EMAIL_HOST_USER = 'sswpit3@gmail.com'
-EMAIL_HOST_PASSWORD = 'SSWPyoutube3'
+DEFAULT_FROM_EMAIL = str(os.getenv('DEFAULT_FROM_EMAIL'))
+EMAIL_HOST_USER = str(os.getenv('EMAIL_HOST_USER'))
+EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_HOST_PASSWORD'))
 
 MEDIA_ROOT = BASE_DIR / 'static/images'
 
@@ -158,3 +159,21 @@ MEDIA_ROOT = BASE_DIR / 'static/images'
 # no idea, should i be worried? perhaps, do i know any other solution?
 # too bad
 os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
+
+# CELERY CONFIG
+from celery.schedules import crontab 
+CELERY_BROKER_URL = str(os.getenv('CELERY_BROKER_URL'))
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = str(os.getenv('CELERY_TIMEZONE'))
+CELERY_BEAT_SCHEDULE = {
+    'refresh-feeds-every-15-mins': { 
+        'task': 'youtubeapi.tasks.refreshFeedsBackground', 
+        'schedule': 900.0,
+    },
+    'refresh-watchlist-every-5-mins': { 
+        'task': 'youtubeapi.tasks.refreshWatchlistBackground', 
+        'schedule': 300.0,
+    }
+}
