@@ -47,13 +47,13 @@ def activate(request, uidb64, token):
     except(TypeError, ValueError, OverflowError, user.DoesNotExist) as e:
         user = None
     finally:
-        if user is not None and RegisterTokenGenerator.check_token(user, token):
+        if user is not None and RegisterTokenGenerator().check_token(user, token):
             # Checks if user token is valid
             user.is_active = True
             user.save()
-            return HttpResponse('Account activated')
+            return redirect('user:login')
         else:
-            return HttpResponse('Link invalid')
+            return render(request, 'password_reset_confirm.html', {'invalid': True})
 
 @login_required
 def logout(request):
@@ -63,7 +63,7 @@ def logout(request):
         return redirect(nextUrl)
     except:
         pass
-    return redirect('index')
+    return redirect('videos-index')
 
 def login(request):
     if request.user.is_authenticated:
