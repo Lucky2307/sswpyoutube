@@ -15,13 +15,26 @@ padding-bottom: 3rem;
 margin-bottom: 0;
 background-color: #fff;
 }
+
+.bg-dark {
+    background-color: #f93875!important;
+}
 .card-body {
-    background-color:#519de8;
-    color:white;
+background-color: rgba(245, 245, 245, 0.4);
 }
 .btn-outline-secondary {
     color: #fff;
-    border-color: #fff;
+    border-color: rgba(245, 245, 245, 0.4);
+    background-color: #f93875;
+}
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #f93875;
+    border-color: #f93875;
+}
+.page-link {
+    color: #000000;
 }
 .text-muted {
     color: #fff!important;
@@ -34,7 +47,13 @@ body.dark-mode {
   color:white;
 }
 .card {
-    background-color: #519de8;
+    background-color: rgba(245, 245, 245, 0.4);
+    border: 3px solid rgb(0 0 0 / 55%);
+}
+.btn-primary {
+    color: #fff;
+    background-color: #f93875;
+    border-color: rgba(245, 245, 245, 0.4);
 }
 @media (min-width: 768px) {
 .jumbotron {
@@ -216,13 +235,15 @@ svg.checkbox .is_unchecked{
         <div class="row">
   
           {% for video in page_obj %}
-          <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
+                   <div class="col-md-4">
+            <div class="mb-4 shadow-sm" style="
+    border: 3px solid rgb(0 0 0 / 55%);
+">
               <a href="https://www.youtube.com/watch?v={{ video.videoId }}">
-              <img style="  width: 347px;height: 180px;object-fit: cover;" src="{{ video.thumbnail }}" alt="url">
+              <img style="  width: 344px;height: 180px;object-fit: cover;" src="{{ video.thumbnail }}" alt="url">
               </a>
               <a href="https://www.youtube.com/channel/{{ video.channelId.channelId }}">
-                 <img src="{{ video.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 12px;bottom: 125px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
+                 <img src="{{ video.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 30px;bottom: 140px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
               </a>
               <div class="card-body">
                 <div style="height: 65px;margin-top: 10px;">

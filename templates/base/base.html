@@ -40,13 +40,30 @@ padding-bottom: 3rem;
 margin-bottom: 0;
 background-color: #fff;
 }
+.bg-dark {
+    background-color: #f93875!important;
+}
 .card-body {
-    background-color:#519de8;
-    color:white;
+background-color: rgba(245, 245, 245, 0.4);
+}
+.btn-secondary {
+    color: #fff;
+    border-color: rgba(245, 245, 245, 0.4);
+    background-color: #f93875;
 }
 .btn-outline-secondary {
     color: #fff;
-    border-color: #fff;
+    border-color: rgba(245, 245, 245, 0.4);
+    background-color: #f93875;
+}
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #f93875;
+    border-color: #f93875;
+}
+.page-link {
+    color: #000000;
 }
 .text-muted {
     color: #fff!important;
@@ -59,7 +76,13 @@ body.dark-mode {
   color:white;
 }
 .card {
-    background-color: #519de8;
+    background-color: rgba(245, 245, 245, 0.4);
+    border: 3px solid rgb(0 0 0 / 55%);
+}
+.btn-primary {
+    color: #fff;
+    background-color: #f93875;
+    border-color: rgba(245, 245, 245, 0.4);
 }
 @media (min-width: 768px) {
 .jumbotron {
