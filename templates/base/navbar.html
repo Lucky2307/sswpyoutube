@@ -28,6 +28,7 @@
         <li class="nav-item {% if request.path == agency_index_url %} active {%endif%}">
           <a class="nav-link" href="{{ agency_index_url }}">Agencies</a>
         </li>
+        {% endif %}
         <li class="nav-item {% if request.path == twitter_url %} active {%endif%}">
           <a class="nav-link" href="{{ twitter_url }}">Twitter</a>
         </li>

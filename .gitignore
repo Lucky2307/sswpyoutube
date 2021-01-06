@@ -1,6 +1,3 @@
-static/images/agencies/*
-static/images/flags_icon/*
-db.sqlite3
 __pycache__
 sswpyoutube/__pycache__
 youtubeapi/__pycache__
