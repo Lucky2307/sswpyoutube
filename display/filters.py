@@ -24,5 +24,5 @@ class OrderChannel(django_filters.FilterSet):
 
 class OrderVideo(django_filters.FilterSet):
 
-    start_date = django_filters.DateFilter(field_name="publishedAt", lookup_expr="gte")
-    end_date = django_filters.DateFilter(field_name="publishedAt", lookup_expr="lte")
+    start_date = django_filters.DateFilter(field_name="publishedAt", lookup_expr="gte", widget=forms.DateInput(attrs={'class' : 'form-control', 'type':'date'}))
+    end_date = django_filters.DateFilter(field_name="publishedAt", lookup_expr="lte", widget=forms.DateInput(attrs={'class' : 'form-control', 'type':'date'}))
