@@ -79,7 +79,7 @@
         <img class="bd-placeholder-img rounded-circle" src="{{ channel.icon }}" alt="icon" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140">
         <h5>
           {% if channel.agency %}
-          <img class="bd-placeholder-img" src="{{channel.agency.icon.url}}" alt="icon" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x24" style="width: 80px;">
+          <img class="bd-placeholder-img" src="{{channel.agency.icon.url}}" alt="icon" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x24" style="height: 25px;">
           {% endif %}
           {% for language in channel.language.all %}
           <img class="bd-placeholder-img" src="{{language.icon.url}}" alt="icon" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x24">

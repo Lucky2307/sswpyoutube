@@ -53,7 +53,7 @@ margin-bottom: .25rem;
     <img class="bd-placeholder-img rounded-circle" src="{{ selectedChannel.icon }}" alt="icon" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140">
     <h2>
       {% if selectedChannel.agency %}
-      <img class="bd-placeholder-img" src="{{selectedChannel.agency.icon.url}}" alt="icon" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x24" style="width: 130px;">
+      <img class="bd-placeholder-img" src="{{selectedChannel.agency.icon.url}}" alt="icon" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x24" style="height: 50px;">
       {% endif %}
       {% for language in selectedChannel.language.all %}
       <img class="bd-placeholder-img" src="{{language.icon.url}}" alt="icon" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x24">

@@ -49,7 +49,7 @@
     <div class="row">
     {% for agency in page_obj %}
       <div class="col-lg-4">
-        <img class="bd-placeholder-img" src="{{ agency.icon.url }}" alt="icon" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x24" style="width: 130px;">
+        <img class="bd-placeholder-img" src="{{ agency.icon.url }}" alt="icon" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x24" style="height: 50px;">
         <h5>{{agency.name}}</h5>
         <p><a href="{% url 'agency-delete' agency.id %}" class="btn btn-danger my-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
