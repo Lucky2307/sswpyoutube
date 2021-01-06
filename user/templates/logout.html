@@ -2,6 +2,11 @@
 {% csrf_token %}
 <input type="submit" value="logout">
 <input type="hidden" name="next" value="{{ request.GET.next }}">
+    <style>
+.bg-dark {
+    background-color: #f93875 !important;
+}
+  </style>
 </form>
    <!-- switch -->
 <script>

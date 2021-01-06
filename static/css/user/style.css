@@ -7,7 +7,7 @@ html {
     }
 }
 .bg-dark {
-    background-color: #f93875;
+    background-color: #f93875 !important;
 }
 body.dark-mode {
     background-color: #181818;
