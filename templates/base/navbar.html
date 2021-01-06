@@ -3,6 +3,7 @@
 {% url 'videos-archive' as videos_archive_url %}
 {% url 'language-index' as language_index_url %}
 {% url 'agency-index' as agency_index_url %}
+{% url 'twitter' as twitter_url %}
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="{% url 'landingpage' %}">Holoinfo</a>
@@ -29,6 +30,13 @@
         </li>
         {% endif %}
                         <!-- switch -->
+        <li class="nav-item {% if request.path == agency_index_url %} active {%endif%}">
+          <a class="nav-link" href="{{ twitter_url }}">Twitter</a>
+        </li>
+        
+      </ul>
+        <ul class="navbar-nav navbar-right">
+    <!-- switch -->
 		<div class="switch_box box_3">
 			<div class="toggle_switch">
 				<input type="checkbox" class="switch_3" id="ChangeTheme" >  
@@ -40,8 +48,6 @@
 			  </div>
 		</div>
     <!-- switch -->
-      </ul>
-        <ul class="navbar-nav navbar-right">
         {% if user.is_authenticated %}
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
