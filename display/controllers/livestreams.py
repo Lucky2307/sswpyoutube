@@ -1,12 +1,10 @@
-from django.http import HttpResponseRedirect
-from django.urls import reverse
 from django.shortcuts import render
-from django.contrib import messages
 from django.core.paginator import Paginator
 
 from datetime import datetime, timedelta
 
 from youtubeapi.models.video import Video
+from display.filters import OrderVideo
 
 def videosIndex(request):
     upcomingVideos = Video.objects.filter(liveBroadcastContent='upcoming', scheduledStartTime__gte=datetime.now() ,scheduledStartTime__lte=datetime.now()+timedelta(days=3)).order_by('scheduledStartTime')
@@ -22,14 +20,24 @@ def videosIndex(request):
     return render(request, 'stream/index.html', context=data)
 
 def archivedVideosView(request):
-    archivedVideos = Video.objects.filter(liveBroadcastContent='none').order_by('-publishedAt')
-    paginator = Paginator(archivedVideos, 15)
+    videos_list = Video.objects.filter(liveBroadcastContent='none').order_by('-publishedAt')
 
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    myFilter = OrderVideo(request.GET, queryset=videos_list)
+    videos_list = myFilter.qs
 
+    paginator = Paginator(videos_list, 15)
+
+    page = request.GET.get('page', 1)
+    try:
+        page_obj = paginator.page(page)
+    except PageNotAnInteger:
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        page_obj = paginator.page(paginator.page_number)
     data = {
         'page_obj':page_obj,
+        'paginator':paginator,
+        'myFilter': myFilter,
     }
 
     return render(request, 'stream/archive.html', context=data)

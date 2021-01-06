@@ -30,8 +30,6 @@
   
           <button class="btn btn-primary btn-lg btn-block" type="submit">Find</button>
         </form>
-        <hr class="mb-4">
-
         {% if messages %}
         <div class="py-5 text-center">
           <h2>Info:</h2>
@@ -40,22 +38,54 @@
           {% endfor %}
         </div>
         {% endif %}
+        <hr class="mb-4">
       </div>
     </div>
   
   </div>
 
   <div class="container marketing">
-    {% include 'base/paginator.html' %}
 
+    <div class="row mb-4">
+          <div class="card card-body">
+
+            <form action="" method="get">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="name">Name contains:</label>
+                    {{myFilter.form.name}}
+                  </div>
+                <div class="form-group col-md-6">
+                  <label for="name">Agency:</label>
+                  {{myFilter.form.agency}}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name">Language(s)</label>
+                  {{myFilter.form.language}}
+              </div>
+              <button class="btn btn-primary" type="submit">
+                Filter
+              </button>
+            </form>
+          </div>
+        </div>
+
+        {% include 'base/paginator.html' %}
     <!-- Three columns of text below the carousel -->
     <div class="row">
     {% for channel in page_obj %}
       <div class="col-lg-4">
-        <!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg> -->
         <img class="bd-placeholder-img rounded-circle" src="{{ channel.icon }}" alt="icon" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140">
+        <h5>
+          {% if channel.agency %}
+          <img class="bd-placeholder-img" src="{{channel.agency.icon.url}}" alt="icon" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x24" style="height: 25px;">
+          {% endif %}
+          {% for language in channel.language.all %}
+          <img class="bd-placeholder-img" src="{{language.icon.url}}" alt="icon" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x24">
+          {% endfor %}
+        </h5>
         <h5>{{channel.name}}</h5>
-        <!-- <p><a class="btn btn-secondary" href="https://www.youtube.com/channel/{{ channel.channelId }}" role="button">Go to channel &raquo;</a></p> -->
         <p><a class="btn btn-secondary" href="{% url 'channel-detail' channel.channelId %}" role="button">View Details &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
     {% endfor %}
