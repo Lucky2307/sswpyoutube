@@ -28,7 +28,7 @@
             </div>
           </div>
   
-          <button class="btn btn-primary btn-lg btn-block" type="submit">Find</button>
+          <button class="btn btn-outline-secondary btn-lg btn-block" type="submit">Find</button>
         </form>
         {% if messages %}
         <div class="py-5 text-center">
@@ -64,7 +64,7 @@
                 <label for="name">Language(s)</label>
                   {{myFilter.form.language}}
               </div>
-              <button class="btn btn-primary" type="submit">
+              <button class="btn btn-outline-secondary" type="submit">
                 Filter
               </button>
             </form>
@@ -86,7 +86,7 @@
           {% endfor %}
         </h5>
         <h5>{{channel.name}}</h5>
-        <p><a class="btn btn-secondary" href="{% url 'channel-detail' channel.channelId %}" role="button">View Details &raquo;</a></p>
+        <p><a class="btn btn-outline-secondary" href="{% url 'channel-detail' channel.channelId %}" role="button">View Details &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
     {% endfor %}
     </div><!-- /.row -->

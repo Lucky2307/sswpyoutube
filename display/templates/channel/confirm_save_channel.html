@@ -8,52 +8,209 @@
 
 {% block customStyle %}
 <style>
-    .jumbotron {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  margin-bottom: 0;
-  background-color: #fff;
+  .jumbotron {
+padding-top: 3rem;
+padding-bottom: 3rem;
+margin-bottom: 0;
+background-color: #fff;
+}
+.text-center {
+    text-align: center!important;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    margin-bottom: 0;
+}
+
+.bg-dark {
+    background-color: #f93875!important;
+}
+.card-body {
+background-color: rgb(183 183 183 / 20%);
+}
+.btn-outline-secondary {
+    color: #fff;
+    border-color: rgba(245, 245, 245, 0.4);
+    background-color: #f93875;
+}
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #f93875;
+    border-color: #f93875;
+}
+.page-link {
+    color: #000000;
+}
+.text-muted {
+    color: #fff!important;
+}
+.dark-mode {
+    background-color: #2f2f2f;
+}
+body.dark-mode {
+  background-color: #2f2f2f;
+  color:white;
+}
+.card {
+    background-color: rgba(245, 245, 245, 0.4);
+    2px solid rgb(0 0 0 / 19%)
+}
+.btn-primary {
+    color: #fff;
+    background-color: #f93875;
+    border-color: rgba(245, 245, 245, 0.4);
 }
 @media (min-width: 768px) {
-  .jumbotron {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
+.jumbotron {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
 }
 
 .jumbotron p:last-child {
-  margin-bottom: 0;
+margin-bottom: 0;
 }
 
 .jumbotron h1 {
-  font-weight: 300;
+font-weight: 300;
 }
 
 .jumbotron .container {
-  max-width: 40rem;
+max-width: 40rem;
 }
 
 footer {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+padding-top: 3rem;
+padding-bottom: 3rem;
 }
 
 footer p {
-  margin-bottom: .25rem;
+margin-bottom: .25rem;
 }
+/* Switch Specific Style Start */
+
+
+.toggle_switch{
+  width: 100px;
+  height: 45px;
+  position: relative;
+}
+
+input[type="checkbox"].switch_3{
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  outline: 0;
+  z-index: 1;
+}
+
+svg.checkbox .outer-ring{
+  stroke-dasharray: 375;
+  stroke-dashoffset: 375;
+  -webkit-animation: resetRing .35s ease-in-out forwards;
+          animation: resetRing .35s ease-in-out forwards;
+}
+
+input[type="checkbox"].switch_3:checked + svg.checkbox .outer-ring{
+  -webkit-animation: animateRing .35s ease-in-out forwards;
+          animation: animateRing .35s ease-in-out forwards;
+}
+
+input[type="checkbox"].switch_3:checked + svg.checkbox .is_checked{
+  opacity: 1;
+  -webkit-transform: translateX(0) rotate(0deg);
+          transform: translateX(0) rotate(0deg);
+}
+
+input[type="checkbox"].switch_3:checked + svg.checkbox .is_unchecked{
+  opacity: 0;
+  -webkit-transform: translateX(-200%) rotate(180deg);
+          transform: translateX(-200%) rotate(180deg);
+}
+
+
+svg.checkbox{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+svg.checkbox .is_checked{
+  opacity: 0;
+  fill: white;
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+  -webkit-transform: translateX(200%) rotate(45deg);
+          transform: translateX(200%) rotate(45deg);
+  -webkit-transition: all .35s;
+  transition: all .35s;
+}
+
+svg.checkbox .is_unchecked{
+  opacity: 1;
+  fill: yellow;
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+  -webkit-transform: translateX(0) rotate(0deg);
+          transform: translateX(0) rotate(0deg);
+  -webkit-transition: all .35s;
+  transition: all .35s;
+}
+
+@-webkit-keyframes animateRing{
+  to{
+    stroke-dashoffset: 0;
+    stroke: #233043;
+  }
+}
+
+@keyframes animateRing{
+  to{
+    stroke-dashoffset: 0;
+    stroke: #233043;
+  }
+}
+
+@-webkit-keyframes resetRing{
+  to{
+    stroke-dashoffset: 0;
+    stroke: #b0aa28;
+  }
+}
+
+@keyframes resetRing{
+  to{
+    stroke-dashoffset: 0;
+    stroke: #b0aa28;
+  }
+}
+
+/* Switch Specific Style End */
 </style>
 {% endblock %}
 
 {% block content %}
-<section class="jumbotron text-center">
+<section class="text-center">
     <div class="container">
       <h2>{{ fetchedChannel.1 }}</h2>
-      <p class="lead text-muted">This channel is not registered in our database. However, it is a valid YouTube channel and you can add it into the watchlist.</p>
+      <p class="lead text">This channel is not registered in our database. However, it is a valid YouTube channel and you can add it into the watchlist.</p>
       <p>
         <form  action="" method="post">
             {% csrf_token %}
-            <input class="btn btn-primary my-2" type="submit" value="Save to database"/>
-            <a href="https://www.youtube.com/channel/{{ fetchedChannel.0 }}" class="btn btn-secondary my-2">
+            <input class="btn btn-outline-secondary my-2" type="submit" value="Save to database"/>
+            <a href="https://www.youtube.com/channel/{{ fetchedChannel.0 }}" class="btn btn-outline-secondary my-2">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
                 <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.122C.002 7.343.01 6.6.064 5.78l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/>
               </svg> Go to channel</a>

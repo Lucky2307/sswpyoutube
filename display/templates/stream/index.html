@@ -18,13 +18,13 @@
           {% for liveVideo in liveVideos %}
                    <div class="col-md-4">
             <div class="mb-4 shadow-sm" style="
-    border: 3px solid rgb(0 0 0 / 55%);
-">
-              <a href="https://www.youtube.com/watch?v={{ video.videoId }}">
-              <img style="  width: 344px;height: 180px;object-fit: cover;" src="{{ video.thumbnail }}" alt="url">
+                border: 2px solid rgb(0 0 0 / 19%);
+                      ">
+              <a href="https://www.youtube.com/watch?v={{ liveVideo.videoId }}">
+              <img style="  width: 344px;height: 180px;object-fit: cover;" src="{{ liveVideo.thumbnail }}" alt="url">
               </a>
-              <a href="https://www.youtube.com/channel/{{ video.channelId.channelId }}">
-                 <img src="{{ video.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 30px;bottom: 140px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
+              <a href="https://www.youtube.com/channel/{{ liveVideo.channelId.channelId }}">
+                 <img src="{{ liveVideo.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 30px;bottom: 140px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
               </a>
               <div class="card-body">
                 <div style="height: 65px;margin-top: 10px;">
@@ -38,7 +38,7 @@
                   <div class="btn-group">
                     <a href="https://www.youtube.com/watch?v={{ liveVideo.videoId }}"><button type="button" class="btn btn-sm btn-outline-danger">Live</button></a>
                   </div>
-                  <small class="text-muted">{{liveVideo.actualStartTime}}</small>
+                  <small class="text">{{liveVideo.actualStartTime}}</small>
                 </div>
               </div>
             </div>
@@ -61,13 +61,13 @@
           {% for upcomingVideo in upcomingVideos %}
                    <div class="col-md-4">
             <div class="mb-4 shadow-sm" style="
-    border: 3px solid rgb(0 0 0 / 55%);
+    border: 2px solid rgb(0 0 0 / 19%);
 ">
-              <a href="https://www.youtube.com/watch?v={{ video.videoId }}">
-              <img style="  width: 344px;height: 180px;object-fit: cover;" src="{{ video.thumbnail }}" alt="url">
+              <a href="https://www.youtube.com/watch?v={{ upcomingVideo.videoId }}">
+              <img style="  width: 344px;height: 180px;object-fit: cover;" src="{{ upcomingVideo.thumbnail }}" alt="url">
               </a>
-              <a href="https://www.youtube.com/channel/{{ video.channelId.channelId }}">
-                 <img src="{{ video.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 30px;bottom: 140px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
+              <a href="https://www.youtube.com/channel/{{ upcomingVideo.channelId.channelId }}">
+                 <img src="{{ upcomingVideo.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 30px;bottom: 140px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
               </a>
               <div class="card-body">
                 <div style="height: 65px;margin-top: 10px;">
@@ -81,7 +81,7 @@
                   <div class="btn-group">
                     <a href="https://www.youtube.com/watch?v={{ upcomingVideo.videoId }}"><button type="button" class="btn btn-sm btn-outline-info">In {{ upcomingVideo.scheduledStartTime|timeuntil|upto:',' }}</button></a>
                   </div>
-                  <small class="text-muted">{{ upcomingVideo.scheduledStartTime }}</small>
+                  <small class="text">{{ upcomingVideo.scheduledStartTime }}</small>
                 </div>
               </div>
             </div>
@@ -103,13 +103,13 @@
             {% for recentlyEndedStream in recentlyEndedStreams %}
                    <div class="col-md-4">
             <div class="mb-4 shadow-sm" style="
-    border: 3px solid rgb(0 0 0 / 55%);
+    border: 2px solid rgb(0 0 0 / 19%);
 ">
-              <a href="https://www.youtube.com/watch?v={{ video.videoId }}">
-              <img style="  width: 344px;height: 180px;object-fit: cover;" src="{{ video.thumbnail }}" alt="url">
+              <a href="https://www.youtube.com/watch?v={{ recentlyEndedStream.videoId }}">
+              <img style="  width: 344px;height: 180px;object-fit: cover;" src="{{ recentlyEndedStream.thumbnail }}" alt="url">
               </a>
-              <a href="https://www.youtube.com/channel/{{ video.channelId.channelId }}">
-                 <img src="{{ video.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 30px;bottom: 140px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
+              <a href="https://www.youtube.com/channel/{{ recentlyEndedStream.channelId.channelId }}">
+                 <img src="{{ recentlyEndedStream.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 30px;bottom: 140px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
               </a>
               <div class="card-body">
                 <div style="height: 65px;margin-top: 10px;">
@@ -129,7 +129,7 @@
                       {% endif %}
                     </button></a>
                   </div>
-                  <small class="text-muted">
+                  <small class="text">
                     {% if recentlyEndedStream.actualStartTime %}
                       {{ recentlyEndedStream.actualStartTime }}
                     {% else %}

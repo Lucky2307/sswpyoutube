@@ -20,7 +20,7 @@ background-color: #fff;
     background-color: #f93875!important;
 }
 .card-body {
-background-color: rgba(245, 245, 245, 0.4);
+background-color: rgb(183 183 183 / 20%);
 }
 .btn-outline-secondary {
     color: #fff;
@@ -48,7 +48,7 @@ body.dark-mode {
 }
 .card {
     background-color: rgba(245, 245, 245, 0.4);
-    border: 3px solid rgb(0 0 0 / 55%);
+    2px solid rgb(0 0 0 / 19%)
 }
 .btn-primary {
     color: #fff;
@@ -223,7 +223,7 @@ svg.checkbox .is_unchecked{
                   {{myFilter.form.end_date}}
                 </div>
               </div>
-              <button class="btn btn-primary" type="submit">
+              <button class="btn btn-outline-secondary btn-lg btn-block" type="submit">
                 Filter
               </button>
             </form>
@@ -237,7 +237,7 @@ svg.checkbox .is_unchecked{
           {% for video in page_obj %}
                    <div class="col-md-4">
             <div class="mb-4 shadow-sm" style="
-    border: 3px solid rgb(0 0 0 / 55%);
+    border: 2px solid rgb(0 0 0 / 19%)
 ">
               <a href="https://www.youtube.com/watch?v={{ video.videoId }}">
               <img style="  width: 344px;height: 180px;object-fit: cover;" src="{{ video.thumbnail }}" alt="url">
@@ -258,12 +258,12 @@ svg.checkbox .is_unchecked{
                   <div class="btn-group">
                     <a href="https://www.youtube.com/watch?v={{ video.videoId }}"><button type="button" class="btn btn-sm btn-outline-danger">Live</button></a>
                   </div>
-                  <small class="text-muted">{{video.actualStartTime}}</small>
+                  <small class="text">{{video.actualStartTime}}</small>
                   {% elif video.liveBroadcastContent == "upcoming" %}
                   <div class="btn-group">
                     <a href="https://www.youtube.com/watch?v={{ video.videoId }}"><button type="button" class="btn btn-sm btn-outline-info">In {{ video.scheduledStartTime|timeuntil|upto:',' }}</button></a>
                   </div>
-                  <small class="text-muted">{{video.scheduledStartTime}}</small>
+                  <small class="text">{{video.scheduledStartTime}}</small>
                   {% else %}
                   <div class="btn-group">
                     <a href="https://www.youtube.com/watch?v={{ video.videoId }}"><button type="button" class="btn btn-sm btn-outline-secondary">
@@ -274,7 +274,7 @@ svg.checkbox .is_unchecked{
                       {% endif %}
                     </button></a>
                   </div>
-                  <small class="text-muted">
+                  <small class="text">
                     {% if video.actualStartTime %}
                       {{ video.actualStartTime }}
                     {% elif video.scheduledStartTime %}
