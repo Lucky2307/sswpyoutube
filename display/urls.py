@@ -1,4 +1,5 @@
 from django.urls import path
+from django.shortcuts import render
 from .controllers import livestreams, channels, language, agencies, footer
 
 urlpatterns = [
@@ -19,4 +20,6 @@ urlpatterns = [
 
     path('footer/help', footer.footer, name='footer-help'),
     path('footer/about', footer.footer2, name='footer-about'),
+
+    path('twitter/', lambda request: render(request, 'twitter/twitter.html', {}), name='twitter')
 ]
