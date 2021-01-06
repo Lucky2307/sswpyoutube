@@ -8,20 +8,24 @@
 {% endblock %}
 
 {% block content %}
-  
-  <div class="album py-5 bg-light">
+      <div class="py-5 text-center">
+      <h2>Currently Live Streaming</h2>
+    </div>
+  <div class="album py-5">
       <div class="container">
         <div class="row">
   
           {% for liveVideo in liveVideos %}
-          <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
+                   <div class="col-md-4">
+            <div class="mb-4" style="
+                border: 2px solid rgb(0 0 0 / 19%);
+                      ">
               <a href="https://www.youtube.com/watch?v={{ liveVideo.videoId }}">
-                <img style="  width: 347px;height: 180px;object-fit: cover;" src="{{ liveVideo.thumbnail }}" alt="url">
-                </a>
-                <a href="https://www.youtube.com/channel/{{ liveVideo.channelId.channelId }}">
-                   <img src="{{ liveVideo.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 12px;bottom: 125px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
-                </a>
+              <img style="  width: 344px;height: 180px;object-fit: cover;" src="{{ liveVideo.thumbnail }}" alt="url">
+              </a>
+              <a href="https://www.youtube.com/channel/{{ liveVideo.channelId.channelId }}">
+                 <img src="{{ liveVideo.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 30px;bottom: 140px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
+              </a>
               <div class="card-body">
                 <div style="height: 65px;margin-top: 10px;">
                   <p style="display: -webkit-box;
@@ -34,7 +38,7 @@
                   <div class="btn-group">
                     <a href="https://www.youtube.com/watch?v={{ liveVideo.videoId }}"><button type="button" class="btn btn-sm btn-outline-danger">Live</button></a>
                   </div>
-                  <small class="text-muted">{{liveVideo.actualStartTime}}</small>
+                  <small class="text">{{liveVideo.actualStartTime}}</small>
                 </div>
               </div>
             </div>
@@ -43,24 +47,28 @@
           
         </div>
       </div>
-      <hr class="mb-4">
+    </div>
+          <hr class="mb-4">
+          <div class="py-5 text-center">
+      <h2>Upcoming Live Streams</h2>
     </div>
   
-  <div class="album py-5 bg-light">
+  <div class="album py-5">
       <div class="container">
   
         <div class="row">
   
           {% for upcomingVideo in upcomingVideos %}
-          <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
+                   <div class="col-md-4">
+            <div class="mb-4" style="
+    border: 2px solid rgb(0 0 0 / 19%);
+">
               <a href="https://www.youtube.com/watch?v={{ upcomingVideo.videoId }}">
-                <img style="  width: 347px;height: 180px;object-fit: cover;" src="{{ upcomingVideo.thumbnail }}" alt="url">
-                </a>
-                <a href="https://www.youtube.com/channel/{{ upcomingVideo.channelId.channelId }}">
-                   <img src="{{ upcomingVideo.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 12px;bottom: 125px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
-                </a>
-
+              <img style="  width: 344px;height: 180px;object-fit: cover;" src="{{ upcomingVideo.thumbnail }}" alt="url">
+              </a>
+              <a href="https://www.youtube.com/channel/{{ upcomingVideo.channelId.channelId }}">
+                 <img src="{{ upcomingVideo.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 30px;bottom: 140px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
+              </a>
               <div class="card-body">
                 <div style="height: 65px;margin-top: 10px;">
                   <p style="display: -webkit-box;
@@ -73,7 +81,7 @@
                   <div class="btn-group">
                     <a href="https://www.youtube.com/watch?v={{ upcomingVideo.videoId }}"><button type="button" class="btn btn-sm btn-outline-info">In {{ upcomingVideo.scheduledStartTime|timeuntil|upto:',' }}</button></a>
                   </div>
-                  <small class="text-muted">{{ upcomingVideo.scheduledStartTime }}</small>
+                  <small class="text">{{ upcomingVideo.scheduledStartTime }}</small>
                 </div>
               </div>
             </div>
@@ -82,23 +90,27 @@
           
         </div>
       </div>
-      <hr class="mb-4">
     </div>
-    
-    <div class="album py-5 bg-light">
+      <hr class="mb-4">
+    <div class="py-5 text-center">
+      <h2>Recently Ended Live Streams</h2>
+    </div>
+    <div class="album py-5">
         <div class="container">
     
           <div class="row">
     
             {% for recentlyEndedStream in recentlyEndedStreams %}
-          <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
+                   <div class="col-md-4">
+            <div class="mb-4" style="
+    border: 2px solid rgb(0 0 0 / 19%);
+">
               <a href="https://www.youtube.com/watch?v={{ recentlyEndedStream.videoId }}">
-                <img style="  width: 347px;height: 180px;object-fit: cover;" src="{{ recentlyEndedStream.thumbnail }}" alt="url">
-                </a>
-                <a href="https://www.youtube.com/channel/{{ recentlyEndedStream.channelId.channelId }}">
-                   <img src="{{ recentlyEndedStream.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 12px;bottom: 125px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
-                </a>
+              <img style="  width: 344px;height: 180px;object-fit: cover;" src="{{ recentlyEndedStream.thumbnail }}" alt="url">
+              </a>
+              <a href="https://www.youtube.com/channel/{{ recentlyEndedStream.channelId.channelId }}">
+                 <img src="{{ recentlyEndedStream.channelId.icon }}" alt="icon" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" style="width: 60px;height: 60px;position: absolute;left: 30px;bottom: 140px;border-radius: 30px;border: 2px solid #000;overflow: hidden;">
+              </a>
               <div class="card-body">
                 <div style="height: 65px;margin-top: 10px;">
                   <p style="display: -webkit-box;
@@ -117,7 +129,7 @@
                       {% endif %}
                     </button></a>
                   </div>
-                  <small class="text-muted">
+                  <small class="text">
                     {% if recentlyEndedStream.actualStartTime %}
                       {{ recentlyEndedStream.actualStartTime }}
                     {% else %}
