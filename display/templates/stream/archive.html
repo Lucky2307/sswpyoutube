@@ -56,9 +56,31 @@ margin-bottom: .25rem;
 
   <div class="album py-5 bg-light">
 
-    {% include 'base/paginator.html' %}
+    
 
       <div class="container">
+        <div class="row mb-4">
+          <div class="card card-body">
+    
+            <form action="" method="get">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="name">From:</label>
+                    {{myFilter.form.start_date}}
+                  </div>
+                <div class="form-group col-md-6">
+                  <label for="name">Until:</label>
+                  {{myFilter.form.end_date}}
+                </div>
+              </div>
+              <button class="btn btn-primary" type="submit">
+                Filter
+              </button>
+            </form>
+          </div>
+        </div>
+
+        {% include 'base/paginator.html' %}
   
         <div class="row">
   
