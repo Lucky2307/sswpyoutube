@@ -4,9 +4,12 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+login_required = login_required(login_url='user:login')
 
 from youtubeapi.models.agency import Agency
 
+@login_required
 def agencyIndex(request):
 
     form = CreateAgencyForm()
@@ -33,6 +36,7 @@ def agencyIndex(request):
 
     return render(request, 'agency/index.html', context=data)
 
+@login_required
 def DeleteAgency(request, id):
 
     agency = Agency.objects.get(pk=id)

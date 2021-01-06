@@ -8,8 +8,14 @@
 
 {% block content %}
 <div class="container">
-    <div class="py-5 text-center">
-      <h2>All Channels</h2>
+  <div class="py-5 text-center">
+    <h2>All Channels</h2>
+  <!-- </div>
+
+</div> -->
+{% if user.is_authenticated %}
+<!-- <div class="container">
+    <div class="py-5 text-center"> -->
       <p class="lead">Below are some of the channels saved in our database. You can also find or add new channel with the form provided.</p>
     </div>
   
@@ -43,6 +49,12 @@
     </div>
   
   </div>
+  {% else %}
+  <p class="lead">Below are some of the channels saved in our database.</p>
+</div>
+
+</div>
+  {% endif %}
 
   <div class="container marketing">
 

@@ -21,6 +21,7 @@
         <li class="nav-item {% if request.path == videos_archive_url %} active {%endif%}">
           <a class="nav-link" href="{{ videos_archive_url }}">Archive</a>
         </li>
+        {% if user.is_authenticated %}
         <li class="nav-item {% if request.path == language_index_url %} active {%endif%}">
           <a class="nav-link" href="{{ language_index_url }}">Languages</a>
         </li>
