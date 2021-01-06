@@ -2,15 +2,11 @@
 _A website that keeps track of virtual YouTubers and their live streaming activities_
 
 ## Quickstart
+This quickstart will help you to ready the app immediately without having to input dozens of channel manually
+
 Install the dependencies listed in requirements.txt:
 ```bash
 pip install -r requirements.txt
-```
-
-Make the migrations and then migrate them:
-```bash
-python manage.py makemigrations
-python manage.py migrate
 ```
 
 From here, you can use our default configurations set in .env or customize it for your own purpose.
@@ -20,9 +16,9 @@ If you're using Linux, you may want to automate the process of refreshing the vi
 redis-cli ping
 ```
 
-After that, inform your worker to read from custom scheduler:
+After that, start your worker:
 ```bash
-celery -A sswpyoutube beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
+celery -A sswpyoutube beat -l INFO
 ```
 
 And on a separate terminal:
