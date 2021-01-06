@@ -13,6 +13,11 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 	<link rel="stylesheet" href="{% static 'css/user/style.css' %}">
     {% endblock customStyle %}
+        <style>
+.bg-dark {
+    background-color: #f93875 !important;
+}
+  </style>
 </head>
 
 <body>
@@ -74,3 +79,43 @@
 {% endblock content %}
 </body>
 </html>
+   <!-- switch -->
+<script>
+var checkbox = document.getElementById("ChangeTheme"); 
+
+//check storage if dark mode was on or off
+if (sessionStorage.getItem("mode") == "dark") {
+  darkmode();
+} else {
+  nodark(); 
+}
+//if the checkbox state is changed, run a funtion
+checkbox.addEventListener("change", function() {
+  if (checkbox.checked) {
+    darkmode(); 
+
+  } else {
+    nodark(); 
+  }
+});
+
+//function for checkbox when checkbox is checked
+function darkmode() {
+  document.body.classList.add("dark-mode"); 
+  checkbox.checked = true; 
+  sessionStorage.setItem("mode", "dark"); 
+}
+
+function onload() {
+  document.body.classList.toggle('dark-mode', localStorage.getItem('darkmode') === 'true');
+  document.getElementById("card").classList.add("dark-mode", localStorage.getItem('dive') === 'true');
+}
+
+//function for checkbox when checkbox is not checked
+function nodark() {
+  document.body.classList.remove("dark-mode"); 
+  checkbox.checked = false; 
+  sessionStorage.setItem("mode", "light"); 
+}
+</script>
+  <!-- switch -->
