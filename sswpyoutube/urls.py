@@ -15,9 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import render
+from . import views
+
+from django.http import HttpResponse
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('youtubeapi/', include('youtubeapi.urls')),
     path('display/', include('display.urls')),
+    path('user/', include('user.urls', namespace='user')),
+    path('landingpage/', lambda request: render(request, 'index.html'), name='landingpage'),
+    path('', views.index, name='index')
 ]
