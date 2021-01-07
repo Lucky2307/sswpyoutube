@@ -30,3 +30,5 @@ This will refresh the video feeds to check on any new streams (every 15 min by d
 ```bash
 python manage.py runserver
 ```
+
+You can then access the web page through the [landing page](http://localhost:8000/landingpage/).
