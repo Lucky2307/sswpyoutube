@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
 from youtubeapi.models.channel import Channel
 from youtubeapi.models.video import Video
@@ -29,10 +29,7 @@ def confirmSaveChannel(request, channelId):
 def updateRecentFeeds(request):
     channels = Channel.objects.all()
     numOfVids = refreshFeeds()
-    if numOfVids > 0:
-        return HttpResponse('All %d channel(s) crawled. %d new video(s) found.' % (len(channels), numOfVids))
-    else:
-        return HttpResponse('no new vidoes found')
+    return HttpResponseRedirect(reverse('videos-index'))
 
 # Update the metadata of all upcoming and live video, use this to figure out if an upcoming
 # live stream has started or otherwise, ongoing live stream has ended
@@ -41,7 +38,4 @@ def updateWatchlist(request):
 
     watchlistedVideoIdList = refreshWatchlist()
 
-    if watchlistedVideoIdList > 0:
-        return HttpResponse('Watchlish updated. %d video(s) updated.' % watchlistedVideoIdList)
-    else:
-        return HttpResponse('No changes were made.')
+    return HttpResponseRedirect(reverse('videos-index'))

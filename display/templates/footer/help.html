@@ -10,5 +10,11 @@
     <div class="py-5 text-center">
       <h2>Feedback/Bug Reports</h2>
       <p class="lead">You can create an issue in the <a href="https://github.com/Lucky2307/sswpyoutube"> github</a></p>
+      <h2>Windows</h2>
+      <p class="lead">At the moment, celery no longer supports windows. As such you will have to manually refresh the feeds and the watch list:</p>
+      <p>
+        <a href="{% url 'update-recent-feeds' %}" class="btn btn-outline-secondary my-2">Update feeds</a>
+        <a href="{% url 'update-watchlist' %}" class="btn btn-outline-secondary my-2">Update watchlist</a>
+      </p>
     </div>
   {% endblock %}
